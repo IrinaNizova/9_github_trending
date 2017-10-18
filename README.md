@@ -6,7 +6,8 @@ With this script you can look 20 most starring github projects for the last week
 ```$ python github_trending.py```
 
 ## Example of output
-```json------------------------------
+```
+------------------------------
 Name: trumail
 Description: :email: :white_check_mark: A Fast and Free Email Verification API written in Go
 You can look it for address https://github.com/sdwolfe32/trumail
@@ -24,7 +25,8 @@ Name: git-bomb
 Description: A (nearly) uncloneable repo
 You can look it for address https://github.com/Katee/git-bomb
 This project have not bugs!
-------------------------------```
+------------------------------
+```
 
 # Project Goals
 
