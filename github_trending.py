@@ -49,7 +49,8 @@ def print_repositories_info(repo_data):
 
 
 if __name__ == '__main__':
-    repositories = get_trending_repositories(20)
+    top_size = 20
+    repositories = get_trending_repositories(top_size)
     if repositories:
 
         print_repositories_info(repositories)
