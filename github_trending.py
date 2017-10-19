@@ -27,8 +27,7 @@ if __name__ == '__main__':
     top_size = 20
     repo_data = get_trending_repositories(top_size)
     if repo_data:
-        print("Here are {} most popular repositories for last week:"
-              .format(len(repo_data)))
+        print("Here are {} most popular repositories for last week:".format(len(repo_data)))
         for repository in repo_data:
             print("-" * 30)
             print("Name: {}".format(repository['name']))
@@ -38,13 +37,11 @@ if __name__ == '__main__':
                 print("But this project has {} issues"
                       .format(repository["open_issues_count"]))
                 login = repository['owner']['login']
-                issues_data = get_open_issues_for_repo(login,
-                                                       repository['name'])
+                issues_data = get_open_issues_for_repo(login, repository['name'])
                 if not issues_data:
                     print("We could not get information about issues")
-                else:
-                    for issue in issues_data:
-                        print("Issue title: {} Create at {}".
+                for issue in issues_data:
+                    print("Issue title: {} Create at {}".
                               format(issue['title'], issue['created_at']))
             else:
                 print("This project have not issues!")
