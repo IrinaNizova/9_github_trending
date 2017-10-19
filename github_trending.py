@@ -54,5 +54,5 @@ if __name__ == '__main__':
                 issues_data = get_open_issues_for_repo(
                     login, repository['name'])
                 print_info_about_issues(issues_data)
-        else:
-            print("Unfortunately, github is not available now")
+            else:
+                print("Unfortunately, github is not available now")
