@@ -23,27 +23,35 @@ def get_open_issues_for_repo(repo_owner, repo_name):
         return []
 
 
+def print_info_about_repo(repository):
+    print("-" * 30)
+    print("Name: {}".format(repository['name']))
+    print("Description: {}".format(repository['description']))
+    print("You can look it on {}".format(repository['html_url']))
+
+
+def print_info_about_issues(issues):
+    if not issues_data:
+        print("We could not get information about issues")
+    for issue in issues_data:
+        print("Issue title: {} Create at {}".
+              format(issue['title'], issue['created_at']))
+
 if __name__ == '__main__':
     top_size = 20
     repo_data = get_trending_repositories(top_size)
     if repo_data:
-        print("Here are {} most popular repositories for last week:".format(len(repo_data)))
-        for repository in repo_data:
-            print("-" * 30)
-            print("Name: {}".format(repository['name']))
-            print("Description: {}".format(repository['description']))
-            print("You can look it on {}".format(repository['html_url']))
-            if int(repository["open_issues_count"]) > 0:
-                print("But this project has {} issues"
-                      .format(repository["open_issues_count"]))
-                login = repository['owner']['login']
-                issues_data = get_open_issues_for_repo(login, repository['name'])
-                if not issues_data:
-                    print("We could not get information about issues")
-                for issue in issues_data:
-                    print("Issue title: {} Create at {}".
-                              format(issue['title'], issue['created_at']))
-            else:
-                print("This project have not issues!")
+        print("Here are {} most popular repositories for last week:"
+              .format(len(repo_data)))
+    else:
+        print("Unfortunately, github is not available now")
+    for repository in repo_data:
+        print_info_about_repo(repository)
+        if int(repository["open_issues_count"]) > 0:
+            print("But this project has {} issues"
+                    .format(repository["open_issues_count"]))
+            login = repository['owner']['login']
+            issues_data = get_open_issues_for_repo(login, repository['name'])
+            print_info_about_issues(issues_data)
     else:
         print("Unfortunately, github is not available now")
