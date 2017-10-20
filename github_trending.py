@@ -55,4 +55,4 @@ if __name__ == '__main__':
                     login, repository['name'])
                 print_info_about_issues(issues_data)
             else:
-                print("Unfortunately, github is not available now")
+                print("This project has not issues!")
