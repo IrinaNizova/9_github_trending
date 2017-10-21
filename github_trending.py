@@ -6,10 +6,12 @@ def get_trending_repositories(top_size):
     last_week = date.today() - timedelta(days=7)
     params = {'q': 'created:>{}'.format(last_week),
               'sort': 'stars', 'per_page': top_size, 'order': 'desc'}
-    repos = requests.get("https://api.github.com/search/repositories",
+    response = requests.get("https://api.github.com/search/repositories",
                          params=params)
-    if repos.status_code == requests.codes.ok:
-        return repos.json()['items']
+
+    if response.ok:
+        repos = response.json()
+        return repos['items']
     return None
 
 
@@ -17,8 +19,9 @@ def get_open_issues_for_repo(repo_owner, repo_name):
     try:
         issues_url = 'https://api.github.com/repos/{}/{}/issues'\
             .format(repo_owner, repo_name)
-        issues = requests.get(issues_url)
-        return [issue for issue in issues.json() if issue['state'] == 'open']
+        response = requests.get(issues_url)
+        issues = response.json()
+        return [issue for issue in issues if issue['state'] == 'open']
     except (requests.exceptions.ConnectionError, TypeError):
         return []
 
@@ -30,7 +33,7 @@ def print_info_about_repo(repository):
     print("You can look it on {}".format(repository['html_url']))
 
 
-def print_info_about_issues(issues):
+def print_info_about_issues(issues_data):
     if not issues_data:
         print("We could not get information about issues")
     for issue in issues_data:
